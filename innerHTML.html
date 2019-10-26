@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<title>innerHTML | XSS test</title>
+</head>
+<body>
+<div id="result"></div>
+<script>
+  function inject() {
+    const hash = decodeURIComponent(location.hash.slice(1));
+    document.querySelector('#result').innerHTML = hash;
+  }
+  window.addEventListener('load', inject)
+  window.addEventListener('hashchange', inject)
+</script>
+</body>
+</html>

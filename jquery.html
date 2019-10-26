@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<title>jQuery | XSS test</title>
+</head>
+<body>
+<p id="result"></p>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script>
+  function inject() {
+    const hash = decodeURIComponent(location.hash.slice(1));
+    $('#result').html(hash);
+  }
+  window.addEventListener('load', inject)
+  window.addEventListener('hashchange', inject)
+</script>
+</body>
+</html>
