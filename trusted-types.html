@@ -7,6 +7,7 @@
 </head>
 <body>
 <script>
+  let errorMessage = null;
   try {
     TrustedTypes.createPolicy("my-policy", {
       createHTML: (unsafe) => {
@@ -19,10 +20,12 @@
       }
     })
   } catch (e) {
-    alert("Please enable 'chrome://flags/#enable-experimental-web-platform-features'")
+    errorMessage = `Go to 'chrome://flags/#enable-experimental-web-platform-features' and enable it!`;
+    alert(errorMessage)
   }
   const hash = decodeURIComponent(location.hash.slice(1));
   document.body.innerHTML = hash;
+  document.body.innerText = errorMessage;
 </script>
 </body>
 </html>
