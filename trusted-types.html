@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="Content-Security-Policy" content="trusted-types my-policy">
+<title>innerHTML | XSS test</title>
+</head>
+<body>
+<script>
+  try {
+    TrustedTypes.createPolicy("my-policy", {
+      createHTML: (unsafe) => {
+        return unsafe
+          .replace(/&/g, "&amp;")
+          .replace(/</g, "&lt;")
+          .replace(/>/g, "&gt;")
+          .replace(/"/g, "&quot;")
+          .replace(/'/g, "&#039;")
+      }
+    })
+  } catch (e) {
+    alert("Please enable 'chrome://flags/#enable-experimental-web-platform-features'")
+  }
+  const hash = decodeURIComponent(location.hash.slice(1));
+  document.body.innerHTML = hash;
+</script>
+</body>
+</html>

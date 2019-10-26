@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="Content-Security-Policy" content="script-src 'self' 'nonce-ValidNonce'" >
+<title>CSP script-src | XSS test</title>
+</head>
+<body>
+<script nonce="ValidNonce">
+  alert("This script is allowed.")
+</script>
+<script nonce="InvalidNonce">
+  alert("This script is not allowed.")
+</script>
+<script>
+  alert("This script does not have nonce. ");
+</script>
+</body>
+</html>

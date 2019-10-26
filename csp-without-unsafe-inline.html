@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="Content-Security-Policy" content="script-src 'self' *.googleapis.com;" >
+<title>CSP script-src | XSS test</title>
+</head>
+<body>
+  <form>
+    <input type="text" id="txt" value="<img src=x onerror=alert(1)>" />
+    <button id="btn">click</button>
+  </form>
+<p id="result"></p>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script>
+  $("#btn").click((e) => {
+    const txt = $("#txt").val();
+    $("#result").html(txt);
+  })
+</script>
+</body>
+</html>
