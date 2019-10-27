@@ -11,17 +11,16 @@
 <title>Trusted Types | XSS test</title>
 </head>
 <body>
+  Open 'devTools > console' to check if Trusted Types works.
 <script>
-  let message = "Trusted Types is working!";
   try {
     TrustedTypes.createPolicy("my-policy")
+    console.log("Trusted Types is working!")
   } catch (e) {
-    message = `Go to 'chrome://flags/#enable-experimental-web-platform-features' and enable it!`;
+    console.log("Please Enable 'chrome://flags/#enable-experimental-web-platform-features' and enable it!");
   }
   const hash = decodeURIComponent(location.hash.slice(1));
-  console.log(message);
   document.body.innerHTML = hash;
-  document.body.innerText = message;
 </script>
 </body>
 </html>
