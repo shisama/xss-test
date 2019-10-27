@@ -17,7 +17,7 @@
     TrustedTypes.createPolicy("my-policy")
     console.log("Trusted Types is working!")
   } catch (e) {
-    console.log("Please Enable 'chrome://flags/#enable-experimental-web-platform-features' and enable it!");
+    console.log("Please Enable 'chrome://flags/#enable-experimental-web-platform-features'");
   }
   const hash = decodeURIComponent(location.hash.slice(1));
   document.body.innerHTML = hash;
