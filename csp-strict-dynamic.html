@@ -8,7 +8,7 @@
 <body>
 <script nonce="ValidNonce">
   const script = document.createElement('script');
-  script.src="/nonce-test.js"
+  script.textContent = location.hash.slice(1);
   document.head.appendChild(script);
 </script>
 </body>
