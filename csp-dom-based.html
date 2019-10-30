@@ -7,13 +7,10 @@
     <body>
         <p id="result"></p>
         <script nonce="Random" src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-        <script nonce="Random">
-          function inject() {
-            const hash = decodeURIComponent(location.hash.slice(1));
-            $('#result').html(hash);
-          }
-          window.addEventListener('load', inject)
-          window.addEventListener('hashchange', inject)
+        <script nonce="Random">                
+          const script = document.createElement('script');
+          script.textContent = location.hash.slice(1);
+          document.head.appendChild(script);
         </script>
     </body>
   </html>
