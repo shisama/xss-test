@@ -7,30 +7,27 @@
   data-feature="Trusted Types"
   data-expires="2019-11-13"
   content="Al5Z5k1x+gqtOoqehnan0TqisAz99E7bBhvgIyceevDZ7maOXtQ+nCZXVoBlto3w0x1f83zYsrX0qDdo8smg6gUAAABneyJvcmlnaW4iOiJodHRwczovL3NoaXNhbWEuZGV2OjQ0MyIsImZlYXR1cmUiOiJUcnVzdGVkRE9NVHlwZXMiLCJleHBpcnkiOjE1NzM1NzI5OTcsImlzU3ViZG9tYWluIjp0cnVlfQ==">
-<meta http-equiv="Content-Security-Policy" content="trusted-types dompurify#demo my-policy">
+<meta http-equiv="Content-Security-Policy" content="require-trusted-types-for 'script'; trusted-types dompurify#demo my-policy">
 <title>Trusted Types & DOMPurify | XSS test</title>
 </head>
 <body>
   Open 'devTools > console' to check if Trusted Types works.<br>
   Orgin Trial expires 2019-11-13.
-<script src="https://js.cybozu.com/dompurify/2.0.3/purify.min.js" data-tt-policy-suffix="demo"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/dompurify/2.0.11/purify.min.js" data-tt-policy-suffix="demo"></script>
 <script>
-  try {
-    if (window.TrustedTypes === undefined) {
-      throw new Error();
-    }
-    const myPolicy = TrustedTypes.createPolicy("my-policy", {
-      createHTML: (s) => {
-        return DOMPurify.sanitize(s);
-      }
-    });
-    const hash = decodeURIComponent(location.hash.slice(1));
-    const trustedHtml = myPolicy.createHTML(hash)
-    document.body.innerHTML = trustedHtml;
-    console.log("Trusted Types is working!")
-  } catch (e) {
+  if (window.trustedTypes === undefined) {
     console.log("Please Enable 'chrome://flags/#enable-experimental-web-platform-features'");
+    throw new Error();
   }
+  const myPolicy = trustedTypes.createPolicy("my-policy", {
+    createHTML: (s) => {
+      return DOMPurify.sanitize(s);
+    }
+  });
+  const hash = decodeURIComponent(location.hash.slice(1));
+  const trustedHtml = myPolicy.createHTML(hash)
+  document.body.innerHTML = trustedHtml;
+  console.log("Trusted Types is working!");
 </script>
 </body>
 </html>
