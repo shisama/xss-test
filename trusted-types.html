@@ -2,17 +2,11 @@
 <html lang="ja">
 <head>
 <meta charset="UTF-8">
-<meta
-  http-equiv="origin-trial"
-  data-feature="Trusted Types"
-  data-expires="2019-11-13"
-  content="Al5Z5k1x+gqtOoqehnan0TqisAz99E7bBhvgIyceevDZ7maOXtQ+nCZXVoBlto3w0x1f83zYsrX0qDdo8smg6gUAAABneyJvcmlnaW4iOiJodHRwczovL3NoaXNhbWEuZGV2OjQ0MyIsImZlYXR1cmUiOiJUcnVzdGVkRE9NVHlwZXMiLCJleHBpcnkiOjE1NzM1NzI5OTcsImlzU3ViZG9tYWluIjp0cnVlfQ==">
 <meta http-equiv="Content-Security-Policy" content="require-trusted-types-for 'script'; trusted-types; script-src 'nonce-ValidNonce' 'strict-dynamic'">
 <title>Trusted Types | XSS test</title>
 </head>
 <body>
   Open 'devTools > console' to check if Trusted Types works.<br>
-  Orgin Trial expires 2019-11-13.
 <script nonce="ValidNonce">
   if (window.trustedTypes === undefined) {
     console.log("Please Enable 'chrome://flags/#enable-experimental-web-platform-features'");
