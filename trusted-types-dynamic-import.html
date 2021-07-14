@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      http-equiv="Content-Security-Policy"
+      content="require-trusted-types-for 'script';"
+    />
+    <title>Dynamic Import with Trusted Types | XSS test</title>
+  </head>
+  <body>
+    Open 'devTools > console' to check if Trusted Types works.<br />
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/dompurify/2.0.11/purify.min.js"
+      data-tt-policy-suffix="demo"
+    ></script>
+    <script>
+      if (window.trustedTypes === undefined) {
+        console.log(
+          "Please Enable 'chrome://flags/#enable-experimental-web-platform-features'"
+        );
+        throw new Error();
+      }
+      const unsefeURL = "./test.js";
+
+      trustedTypes.createPolicy("default", {
+        createScriptURL: (s) => {
+          console.log('should be called but not called!')
+          return DOMPurify.sanitize(s);
+        },
+      });
+      import(unsefeURL).then((m) => console.log(m.foo));
+    </script>
+  </body>
+</html>
